@@ -2,14 +2,44 @@ classDiagram
     %% Replace the placeholders below with your actual classes, attributes, methods, and relationships.
     %% Keep this file updated so it matches your final implementation.
 
-    class ClassName {
-        +type attribute
-        +method() returnType
+    class Owner {
+        +String name 
+        +int available_minutes
     }
 
-    class AnotherClass {
-        +type attribute
-        +method() returnType
+    class Pet {
+        +String name 
+        +String breed
     }
 
-    ClassName --> AnotherClass : relationship
+    class Task{
+        +String name 
+        +int duration 
+        +String priority
+        +bool is_recurring
+    }
+
+    class Schedule{
+        +Date date 
+        +Task[] tasks
+        +int total_time
+        +add_task(task: Task) bool 
+        +display() void
+    }
+
+    class Scheduler{
+        +Owner owner 
+        +Pet pet 
+        +Task[] tasks
+        +generate() Schedule
+        +filter_by_time(time: int) Task[]
+    }
+
+
+    Owner --> Pet: composition
+    Owner --> Task: aggregation
+    Scheduler --> Owner: association
+    Scheduler --> Pet: association
+    Scheduler --> Task: association
+    Scheduler --> Schedule: association
+    Schedule --> Task: aggregation 
